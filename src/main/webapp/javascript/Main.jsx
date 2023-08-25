@@ -38,7 +38,7 @@ function Layout() {
     video.playbackRate = 0.5;
   }, []);
 
-  const isUserLoggedIn = Object.keys(user).length !== 0;
+  const isUserLoggedIn = Object.keys(user) === undefined && Object.keys(user).length !== 0;
 
   return (
     <>
@@ -51,8 +51,6 @@ function Layout() {
         ) : (
           <Link to="Login">Log In</Link>
         )}
-        {console.log("user is " + user)}
-        {console.log("user name is " + user.firstName)}
       </nav>
       <Outlet />
       <div className="App">

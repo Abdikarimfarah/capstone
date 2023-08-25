@@ -23,8 +23,6 @@ body {
   color: white;
   padding: 0;
   margin: 0;
-  width: 100%;
-  height: 100%;
 }
 
 section {
@@ -268,6 +266,24 @@ section {
   pointer-events: none;
 }
 
+#pageButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#pageButton {
+  border: 2px solid #556b2f;
+  width: auto;
+  background-color: #f5deb3;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .plant-container {
   display: flex;
   flex-direction: row;
@@ -397,13 +413,25 @@ section {
   border-radius: 3px;
 }
 
-.form-info-error-message {
+.form-error-message {
   color: red;
   font-size: 12px;
   margin-top: -5px;
 }
 
-.register-login-button {
+.form-success-message {
+  color: green;
+  font-size: 12px;
+  margin-top: -5px;
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.button-container button {
   margin-top: 15px;
   padding: 10px 20px;
   background-color: #007bff;
@@ -415,11 +443,11 @@ section {
   transition: background-color 0.2s;
 }
 
-.register-login-button:hover {
+.button-container button:hover {
   background-color: #0056b3;
 }
 
-.register-login-button:disabled {
+.button-container button:disabled {
   background-color: #a8d2ff;
   cursor: not-allowed;
   opacity: 0.7;
@@ -452,17 +480,16 @@ section {
 
 .user-submission-container {
   width: 400px;
-  margin: 20px auto; 
+  margin: 20px auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-  background-color:rgba(166, 123, 91, 0.8);
+  background-color: rgba(166, 123, 91, 0.8);
 }
 
 #add {
   text-align: center;
-
 }
 .user-submission-form {
   display: flex;

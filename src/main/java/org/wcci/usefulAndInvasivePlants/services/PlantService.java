@@ -1,5 +1,6 @@
 package org.wcci.usefulAndInvasivePlants.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -178,5 +179,14 @@ public class PlantService {
                     "Sorry, you must log in to add plants");
         }
         return submissionRepo.save(submission);
+    }
+
+      public List<Plant> getPlantsForUser(long user_id) {
+        final User databaseUser = findUser(user_id);
+        List<Plant> result = new ArrayList<>();
+        for (final long plantID : databaseUser.getSavedPlants()) {
+            result.add(findPlant(plantID));
+        }
+        return result;
     }
 }

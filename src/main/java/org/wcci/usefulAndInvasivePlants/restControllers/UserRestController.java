@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.wcci.usefulAndInvasivePlants.entities.Plant;
 import org.wcci.usefulAndInvasivePlants.entities.Submission;
 import org.wcci.usefulAndInvasivePlants.entities.User;
 import org.wcci.usefulAndInvasivePlants.services.PlantService;
@@ -49,6 +50,17 @@ public class UserRestController {
                 linkTo(methodOn(UserRestController.class).getUsers()).withRel(LIST_ALL_USERS),
                 linkTo(methodOn(UserRestController.class).getUser(user_id)).withSelfRel());
     }
+
+      @GetMapping("/api/users/{user_id}/plants")
+        public CollectionModel<EntityModel<Plant>> getUserPlants(@PathVariable final long user_id) {
+            List<Plant> result = plantService.getPlantsForUser(user_id);
+
+            final List<EntityModel<Plant>> plants = result.stream()
+                    .map(plant -> EntityModel.of(plant,
+                            linkTo(methodOn(PlantRestController.class).getPlant(plant.getPlantID())).withSelfRel()))
+                    .collect(Collectors.toList());
+            return CollectionModel.of(plants);
+        }
 
     @DeleteMapping("/api/users/{user_id}")
     public ResponseEntity deleteById(@PathVariable long user_id) {

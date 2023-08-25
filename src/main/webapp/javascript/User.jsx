@@ -6,7 +6,7 @@ export default function User() {
   const [username, setUsername] = useState("");
   const [plantId, setPlantId] = useState("");
   const [savedPlants, setSavedPlants] = useState([]);
-  const [savedPlantIDs, setSavedPlantIDs] = useState([]);
+  const [savedPlantIDs, setSavedPlantIDs] = useState([])
   const { user, setUser } = useAuth();
 
   useEffect(() => {
@@ -21,10 +21,10 @@ export default function User() {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        console.log("Pet updated successfully!");
+        console.log("Plant updated successfully!");
       })
       .catch((error) => {
-        console.error("Error updating pet:", error);
+        console.error("Error updating Plant:", error);
       });
   }, [savedPlants]);
 
@@ -85,7 +85,7 @@ export default function User() {
 function SavedPlants() {
   
   const getUserSaved = () => {
-    fetch(`/api/plants/${plant_id}`, {method: "GET", cache: "default" })
+    fetch(`/api/users/${user.userID}/plants`, {method: "GET", cache: "default" })
     .then((response) => response.json())
     .then((response) => setSavedPlants(response));
   console.log(savedPlants);

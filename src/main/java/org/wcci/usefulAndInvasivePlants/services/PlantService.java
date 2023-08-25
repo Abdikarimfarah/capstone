@@ -171,15 +171,12 @@ public class PlantService {
         return submissionRepo.save(submission);
     }
 
-    // public Submission addSubmissionToUser(final Submission submission){
-    //     final Long user_id;
-    //     final Long plant_id;
-    //     final Optional<User> datbaseUser = userRepo.findById(user_id);
-    //     if (!datbaseUser.isPresent()) {
-    //          throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-    //                 "Sorry, you must log in to add plants");
-    //     }
-    //     return submissionRepo.save(submission);
-    // }
-    
+    public Submission addSubmissionToUser(final Submission submission, final Long user_id){
+        final Optional<User> databaseUser = userRepo.findById(user_id);
+        if (!databaseUser.isPresent()) {
+             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Sorry, you must log in to add plants");
+        }
+        return submissionRepo.save(submission);
+    }
 }

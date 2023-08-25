@@ -6,6 +6,7 @@ export default function User() {
   const [username, setUsername] = useState("");
   const [plantId, setPlantId] = useState("");
   const [savedPlants, setSavedPlants] = useState([]);
+  const [savedPlantIDs, setSavedPlantIDs] = useState([]);
   const { user, setUser } = useAuth();
 
   useEffect(() => {
@@ -30,7 +31,6 @@ export default function User() {
   const handleSavePlant = () => {
     if (username && plantId) {
       setSavedPlants([...savedPlants, plantId]);
-      setPlantId("");
     }
   };
 
@@ -68,8 +68,7 @@ export default function User() {
         <button onClick={logOut}>Log Out</button>
       </div>
       <div>
-        <h2>{JSON.stringify(savedPlants)}</h2>
-        <h2>Saved Plants</h2>
+        
       </div>
       <div>
         <ul>
@@ -80,8 +79,33 @@ export default function User() {
           ))}
         </ul>
       </div>
+      <SavedPlants/>
     </div>
   );
+function SavedPlants() {
+  
+  const getUserSaved = () => {
+    fetch(`/api/plants/${plant_id}`, {method: "GET", cache: "default" })
+    .then((response) => response.json())
+    .then((response) => setSavedPlants(response));
+  console.log(savedPlants);
+  return () => {};
+};
+
+return (
+  <><button id="get-plants" onClick={getUserSaved}>
+    See Plants Saved
+  </button>
+  <div id="search-results">
+      {savedPlants.map((onePlant) => (
+        <DisplaySearchResult key={onePlant.plantID} plant={onePlant} />
+      ))}
+      <h2>{JSON.stringify(savedPlants)}</h2>
+        <h2>Saved Plants</h2>
+    </div></>
+);
+}
+}
 
   function DisplaySearchResult({ plant }) {
     console.log(plant);
@@ -104,4 +128,3 @@ export default function User() {
       </div>
     );
   }
-}
